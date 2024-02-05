@@ -12,3 +12,9 @@ input:-webkit-autofill:focus {
 input[data-autocompleted] {
   background-color: transparent !important;
 }
+
+@layer utilities {
+  .body__overlay {
+    @apply after:absolute after:inset-0 after:z-[1000] after:bg-black/50;
+  }
+}
