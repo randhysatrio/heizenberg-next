@@ -5,12 +5,10 @@ import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
 // FONTS
-import { Inter } from "next/font/google";
+import { rubikThin, rubik, rubikBold, rubikExtraBold } from "./_fonts";
 
 // STYLES
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Heizenberg | All your shopping needs",
@@ -25,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${rubikThin.variable} ${rubik.variable} ${rubikBold.variable} ${rubikExtraBold.variable} font-rubik`}
+      >
         {children}
         <Toaster />
       </body>
