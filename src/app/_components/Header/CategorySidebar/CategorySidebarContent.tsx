@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 // ICONS
 import { FaArrowLeft } from "react-icons/fa";
 import { MdOutlineChevronRight } from "react-icons/md";
+import { IoCloseSharp } from "react-icons/io5";
 
 // INTERFACES
 import type { Category } from "@/app/_types/Category";
@@ -64,13 +65,21 @@ export default function CategorySidebarContent({
   >(undefined);
 
   return (
-    <div className="relative flex h-screen w-64 overflow-x-hidden bg-white shadow-md sm:w-72 lg:w-80">
+    <div className="flex h-screen w-64 overflow-x-hidden bg-white shadow-md sm:w-72 lg:w-80">
       <motion.div
         animate={{ x: isShowing ? "-50%" : "0%" }}
         transition={{ bounce: 0 }}
         className="flex h-full w-fit min-w-[200%]"
       >
-        <div className="flex h-full w-1/2 flex-col px-4 pt-20 sm:px-5 lg:px-6">
+        <div className="relative flex h-full w-1/2 flex-col px-4 pt-20 sm:px-5 lg:px-6">
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={closeSidebar}
+            className="absolute right-3 top-4"
+          >
+            <IoCloseSharp className="h-6 w-6 cursor-pointer sm:h-8 sm:w-8" />
+          </motion.button>
+
           <section className="mb-10">
             <h5 className="font-rubik-bold text-2xl leading-none sm:text-3xl">
               Choose from

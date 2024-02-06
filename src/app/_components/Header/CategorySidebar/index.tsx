@@ -12,7 +12,7 @@ import CategorySidebarContent from "./CategorySidebarContent";
 import { MdOutlineMenuOpen } from "react-icons/md";
 
 export default function CategorySidebar() {
-  // OPEN CLOSE SIDEBAR STATES
+  // OPEN CLOSE SIDEBAR STATESS
   const [open, setOpen] = useState(false);
   function toggleOpen() {
     return setOpen((c) => !c);

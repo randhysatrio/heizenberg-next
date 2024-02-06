@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { AnimatePresence, Variant, motion } from "framer-motion";
 
 // FRAMER MOTION VARIANTS
@@ -14,14 +16,6 @@ const OVERLAY_VARIANTS: SidebarVariants = {
       when: "afterChildren",
     },
   },
-};
-const SIDEBAR_VARIANTS: SidebarVariants = {
-  open: {
-    x: "0%",
-  },
-  close: (isLeft) => ({
-    x: isLeft ? "-100%" : "100%",
-  }),
 };
 
 type SidebarProps = {
@@ -50,17 +44,50 @@ export default function Sidebar({
           onClick={close}
           className={`fixed inset-0 z-[3000] flex bg-black bg-opacity-50 ${isLeft ? "justify-start" : "justify-end"}`}
         >
-          <motion.aside
-            custom={isLeft}
-            variants={SIDEBAR_VARIANTS}
-            transition={{ bounce: 0 }}
-            onClick={(e) => e.stopPropagation()}
-            className="h-fit w-fit"
-          >
+          <SidebarBody isLeft={isLeft} close={close}>
             {children}
-          </motion.aside>
+          </SidebarBody>
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+const SIDEBAR_VARIANTS: SidebarVariants = {
+  open: {
+    x: "0%",
+  },
+  close: (isLeft) => ({
+    x: isLeft ? "-100%" : "100%",
+  }),
+};
+
+type SidebarBodyProps = Pick<SidebarProps, "children" | "close"> & {
+  isLeft: boolean;
+};
+function SidebarBody({ children, isLeft, close }: SidebarBodyProps) {
+  useEffect(() => {
+    // Close Sidebar on Esc keydown;
+    function closeOnEsc(e: KeyboardEvent) {
+      if (e.code === "Escape") {
+        close();
+      }
+    }
+    window.addEventListener("keydown", closeOnEsc);
+    return () => {
+      window.removeEventListener("keydown", closeOnEsc);
+    };
+  }, []);
+
+  return (
+    <motion.aside
+      custom={isLeft}
+      variants={SIDEBAR_VARIANTS}
+      transition={{ bounce: 0 }}
+      onClick={(e) => e.stopPropagation()}
+      className="h-fit w-fit"
+    >
+      {children}
+    </motion.aside>
   );
 }

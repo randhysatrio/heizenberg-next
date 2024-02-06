@@ -29,7 +29,6 @@ export default function Authentication() {
         return setOpenSidebar(false);
       }
     }
-
     window.addEventListener("resize", closeSidebar);
     return () => {
       window.removeEventListener("resize", closeSidebar);
