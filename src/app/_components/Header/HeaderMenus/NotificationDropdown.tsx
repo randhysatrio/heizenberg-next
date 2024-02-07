@@ -14,24 +14,26 @@ export default function NotificationDropdown({
     <HoverDropdown
       header={
         <div className="cursor-pointer rounded-md p-2 group-hover:bg-zinc-100">
-          <IoIosNotifications className="h-5 w-5 text-black/75 group-hover:text-black" />
+          <IoIosNotifications className="h-6 w-6 text-black/75 group-hover:text-black" />
         </div>
       }
     >
-      {isLoggedIn ? (
-        <div></div>
-      ) : (
-        <div className="flex h-72 w-72 flex-col items-center justify-center gap-8 rounded-md border bg-white">
-          <div className="font-rubik-extrabold">
-            <h4 className="tracking none text-lg">Login to</h4>
-            <h2 className="text-xl">See your Notification</h2>
-          </div>
+      <div className="w-60 rounded-lg border bg-white">
+        {isLoggedIn ? (
+          <div></div>
+        ) : (
+          <div className="flex h-72 flex-col items-center justify-center gap-8">
+            <div className="font-rubik-extrabold">
+              <h4 className="tracking none text-lg">Login to</h4>
+              <h2 className="text-xl">See your Notification</h2>
+            </div>
 
-          <Link href={"/login"}>
-            <ButtonPrimary>Login</ButtonPrimary>
-          </Link>
-        </div>
-      )}
+            <Link href={"/login"}>
+              <ButtonPrimary>Login</ButtonPrimary>
+            </Link>
+          </div>
+        )}
+      </div>
     </HoverDropdown>
   );
 }

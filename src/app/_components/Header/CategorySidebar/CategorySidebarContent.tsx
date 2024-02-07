@@ -12,40 +12,8 @@ import { IoCloseSharp } from "react-icons/io5";
 // INTERFACES
 import type { Category } from "@/app/_types/Category";
 
-// CATEGORIES
-const CATEGORIES: Category[] = [
-  {
-    id: 1,
-    name: "Electronic",
-    childCategory: [
-      { id: 2, parentId: 1, name: "Camera" },
-      { id: 3, parentId: 1, name: "Headphone" },
-      { id: 4, parentId: 1, name: "Television" },
-      { id: 5, parentId: 1, name: "Speaker" },
-      { id: 6, parentId: 1, name: "Wearable Technology" },
-    ],
-  },
-  {
-    id: 7,
-    name: "Computer",
-    childCategory: [
-      { id: 8, parentId: 2, name: "Processor" },
-      { id: 9, parentId: 2, name: "Motherboard" },
-      { id: 10, parentId: 2, name: "Graphic Card" },
-      { id: 11, parentId: 2, name: "Memory" },
-      { id: 12, parentId: 2, name: "Storage" },
-    ],
-  },
-  {
-    id: 13,
-    name: "Gaming",
-    childCategory: [
-      { id: 14, parentId: 3, name: "Playstation" },
-      { id: 15, parentId: 3, name: "Xbox" },
-      { id: 16, parentId: 3, name: "Gaming Accessories" },
-    ],
-  },
-];
+// MOCK DATA
+import { MOCK_CATEGORIES } from "@/app/_mockData/Categories";
 
 type CategorySidebarContentProps = {
   closeSidebar: () => void;
@@ -71,7 +39,7 @@ export default function CategorySidebarContent({
         transition={{ bounce: 0 }}
         className="flex h-full w-fit min-w-[200%]"
       >
-        <div className="relative flex h-full w-1/2 flex-col px-4 pt-20 sm:px-5 lg:px-6">
+        <nav className="relative flex h-full w-1/2 flex-col px-4 pt-20 sm:px-5 lg:px-6">
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={closeSidebar}
@@ -90,7 +58,7 @@ export default function CategorySidebarContent({
           </section>
 
           <ul className="flex w-full flex-col gap-2 overflow-y-auto overscroll-contain">
-            {CATEGORIES.map((c) => (
+            {MOCK_CATEGORIES.map((c) => (
               <li
                 key={c.id}
                 onClick={() => {
@@ -104,8 +72,8 @@ export default function CategorySidebarContent({
               </li>
             ))}
           </ul>
-        </div>
-        <div className="flex h-full w-1/2 flex-col px-4 pt-6 sm:px-5 lg:px-6">
+        </nav>
+        <nav className="flex h-full w-1/2 flex-col px-4 pt-6 sm:px-5 lg:px-6">
           <motion.div
             whileTap={{ scale: 0.95 }}
             onClick={toggleShowing}
@@ -119,7 +87,7 @@ export default function CategorySidebarContent({
           </h2>
 
           <ul className="flex w-full flex-col">
-            {selectedCategory?.childCategory.map((c) => (
+            {selectedCategory?.subcategory?.map((c) => (
               <li
                 key={c.id}
                 onClick={closeSidebar}
@@ -129,7 +97,7 @@ export default function CategorySidebarContent({
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
       </motion.div>
     </div>
   );

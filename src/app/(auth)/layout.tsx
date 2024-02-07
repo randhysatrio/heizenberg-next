@@ -1,9 +1,8 @@
 // CORE
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-// CONSTANTS
-import { COOKIE_NAME } from "../_config/constanst";
+// UTILS
+import { ServerCookieExtractor } from "../_utils/ServerCookieExtractor";
 
 export default function AuthLayout({
   children,
@@ -11,8 +10,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   // COOKIE CHECK
-  const cookieStore = cookies();
-  if (cookieStore.has(COOKIE_NAME)) {
+  const { isLoggedIn } = ServerCookieExtractor();
+  if (isLoggedIn) {
     return redirect("/");
   }
 

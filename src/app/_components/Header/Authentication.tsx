@@ -8,15 +8,25 @@ import { useRouter } from "next/navigation";
 import ButtonPrimary from "../Button/ButtonPrimary";
 import Sidebar from "../Sidebar";
 
+// LIBS
+import { deleteCookie } from "cookies-next";
+
 // STORE
 import { useAuthStore } from "@/app/_store/AuthStore";
 
-export default function Authentication() {
+// CONSTANTS
+import { COOKIE_NAME } from "@/app/_config/constanst";
+
+// INTERFACE
+import type { User } from "@/app/_types/User";
+
+export default function Authentication({
+  userData,
+}: {
+  userData: User | undefined;
+}) {
   // ROUTER
   const router = useRouter();
-
-  // AUTH
-  const { isLoggedIn } = useAuthStore();
 
   // COMPONENT STATES
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -24,26 +34,48 @@ export default function Authentication() {
     return setOpenSidebar((c) => !c);
   }
   useEffect(() => {
-    function closeSidebar() {
+    function closeOnResize() {
       if (window.innerWidth >= 1024) {
         return setOpenSidebar(false);
       }
     }
-    window.addEventListener("resize", closeSidebar);
+    window.addEventListener("resize", closeOnResize);
     return () => {
-      window.removeEventListener("resize", closeSidebar);
+      window.removeEventListener("resize", closeOnResize);
     };
   }, []);
 
+  // AUTH STORE
+  const { login, logout } = useAuthStore();
+  useEffect(() => {
+    if (userData) {
+      login(userData);
+    }
+  }, [!!userData]);
+
   return (
     <>
-      {isLoggedIn ? (
+      {userData ? (
         <>
           <button onClick={toggleSidebar}>click me</button>
 
-          <Sidebar open={openSidebar} close={toggleSidebar}>
+          <Sidebar open={openSidebar} close={toggleSidebar} side="right">
             <div className="flex h-screen w-60 flex-col bg-white p-4">
               <span>jambu</span>
+              <button
+                onClick={() => {
+                  toggleSidebar();
+
+                  // Give time to the sidebar for it to close;
+                  setTimeout(() => {
+                    deleteCookie(COOKIE_NAME, { path: "/" });
+                    logout();
+                    window.location.reload();
+                  }, 1000);
+                }}
+              >
+                Logout
+              </button>
             </div>
           </Sidebar>
         </>

@@ -9,9 +9,18 @@ import FormInputText from "@/app/_components/Input/FormInpuText";
 import AnimatedButton from "@/app/_components/Button/AnimatedButton";
 import GoogleLoginButton from "@/app/_components/Button/GoogleLoginButton";
 
+// LIBS
+import { setCookie } from "cookies-next";
+
 // FORMS
 import { Formik } from "formik";
 import * as Yup from "yup";
+
+// STORE
+import { useAuthStore } from "@/app/_store/AuthStore";
+
+// CONSTANTS
+import { COOKIE_NAME } from "@/app/_config/constanst";
 
 // INTERFACE
 import type { LoginForm } from "@/app/_types/Login";
@@ -33,6 +42,9 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
+// MOCK DATA
+import { MOCK_USER } from "@/app/_mockData/Users";
+
 export default function LoginForm() {
   // ROUTER
   const router = useRouter();
@@ -40,15 +52,28 @@ export default function LoginForm() {
     return router.push(url);
   }
 
+  // AUTH STORE
+  const { login } = useAuthStore();
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(v, { setStatus, setSubmitting }) => {
+      onSubmit={({ email }, { setStatus, setSubmitting }) => {
         setTimeout(() => {
+          const data = { ...MOCK_USER, email };
+          login(data);
+          setCookie(COOKIE_NAME, JSON.stringify(data), {
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/",
+          });
+
           setStatus(true);
           setSubmitting(false);
-        }, 1000);
+
+          window.location.replace("/");
+          // router.replace("/");
+        }, 2000);
       }}
     >
       {({ handleSubmit, isValid, isSubmitting, status }) => (

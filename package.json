@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "client-only": "^0.0.1",
+    "cookies-next": "^4.1.1",
     "date-fns": "^3.3.1",
     "downshift": "^8.3.1",
     "formik": "^2.4.5",
     "framer-motion": "^11.0.3",
     "next": "14.1.0",
-    "nookies": "^2.5.2",
     "query-string": "^8.2.0",
     "react": "^18",
     "react-dom": "^18",
