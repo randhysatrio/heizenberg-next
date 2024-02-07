@@ -26,8 +26,10 @@ export default function Tabs({
           const isActive = t.name === activeVal;
 
           return (
-            <li
+            <motion.li
               key={t.id || t.name}
+              layout
+              layoutRoot
               onClick={() => onClickTab(t.name)}
               className="group relative cursor-pointer px-3 py-2 hover:bg-zinc-100 lg:px-4"
             >
@@ -38,11 +40,12 @@ export default function Tabs({
               </p>
               {isActive && (
                 <motion.div
+                  layout
                   layoutId={tabId || "page-tabs"}
                   className="absolute bottom-0 left-0 h-[2px] w-full rounded-tl-md rounded-tr-md bg-sky-400"
                 />
               )}
-            </li>
+            </motion.li>
           );
         })}
       </ul>

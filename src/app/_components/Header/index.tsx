@@ -5,6 +5,8 @@ import Authentication from "./Authentication";
 import CategorySidebar from "./CategorySidebar";
 
 import { FaComputer } from "react-icons/fa6";
+import HoverDropdown from "../Dropdown/HoverDropdown";
+import HeaderMenus from "./HeaderMenus";
 
 export default function Header() {
   return (
@@ -20,6 +22,8 @@ export default function Header() {
         </Link>
 
         <Searchbar />
+
+        <HeaderMenus />
 
         <Authentication />
       </section>

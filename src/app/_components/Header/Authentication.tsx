@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 // COMPONENTS
-import { motion } from "framer-motion";
+import ButtonPrimary from "../Button/ButtonPrimary";
 import Sidebar from "../Sidebar";
 
 // STORE
@@ -39,7 +39,7 @@ export default function Authentication() {
     <>
       {isLoggedIn ? (
         <>
-          <motion.button onClick={toggleSidebar}>click me</motion.button>
+          <button onClick={toggleSidebar}>click me</button>
 
           <Sidebar open={openSidebar} close={toggleSidebar}>
             <div className="flex h-screen w-60 flex-col bg-white p-4">
@@ -48,14 +48,9 @@ export default function Authentication() {
           </Sidebar>
         </>
       ) : (
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          whileHover={{ filter: `brightness(1.05)` }}
-          onClick={() => router.push("/login")}
-          className="font-rubik-bold shdaow-sm rounded-md bg-sky-400 px-4 py-2 text-white sm:px-6 lg:px-10 lg:text-lg"
-        >
+        <ButtonPrimary onClick={() => router.push("/login")}>
           Login
-        </motion.button>
+        </ButtonPrimary>
       )}
     </>
   );
