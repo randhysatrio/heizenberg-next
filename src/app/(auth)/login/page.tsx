@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="relative flex min-h-screen justify-center">
+    <main className="relative flex min-h-screen justify-center">
       <section className="absolute inset-0 z-0">
         <Image
           src="/background/login-bg.jpeg"
@@ -38,6 +38,6 @@ export default function LoginPage() {
 
         <LoginForm />
       </section>
-    </div>
+    </main>
   );
 }

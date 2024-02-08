@@ -18,13 +18,9 @@ import { useAuthStore } from "@/app/_store/AuthStore";
 import { COOKIE_NAME } from "@/app/_config/constanst";
 
 // INTERFACE
-import type { User } from "@/app/_types/User";
+import type { AuthData } from "@/app/_types/Auth";
 
-export default function Authentication({
-  userData,
-}: {
-  userData: User | undefined;
-}) {
+export default function Authentication({ userData }: { userData: AuthData }) {
   // ROUTER
   const router = useRouter();
 
@@ -61,17 +57,19 @@ export default function Authentication({
 
           <Sidebar open={openSidebar} close={toggleSidebar} side="right">
             <div className="flex h-screen w-60 flex-col bg-white p-4">
-              <span>jambu</span>
+              <div>
+                <h6>Welcome,</h6>
+                <h3>{userData?.fullName}</h3>
+              </div>
               <button
                 onClick={() => {
-                  toggleSidebar();
-
+                  deleteCookie(COOKIE_NAME, { path: "/" });
+                  logout();
                   // Give time to the sidebar for it to close;
                   setTimeout(() => {
-                    deleteCookie(COOKIE_NAME, { path: "/" });
-                    logout();
-                    window.location.reload();
-                  }, 1000);
+                    window.location.replace("/");
+                  }, 800);
+                  toggleSidebar();
                 }}
               >
                 Logout

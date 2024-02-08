@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="relative flex min-h-screen justify-center lg:justify-end">
+    <main className="relative flex min-h-screen justify-center lg:justify-end">
       <section className="absolute inset-0 z-0">
         <Image
           src="/background/register-bg.jpeg"
@@ -35,6 +35,6 @@ export default function RegisterPage() {
 
         <RegisterForm />
       </section>
-    </div>
+    </main>
   );
 }

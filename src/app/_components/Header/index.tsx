@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { unstable_noStore as noStore } from "next/cache";
 
 import Searchbar from "./Searchbar";
 import Authentication from "./Authentication";
@@ -11,8 +10,6 @@ import { FaComputer } from "react-icons/fa6";
 import { ServerCookieExtractor } from "@/app/_utils/ServerCookieExtractor";
 
 export default function Header() {
-  noStore();
-
   const { isLoggedIn, userData } = ServerCookieExtractor();
 
   return (

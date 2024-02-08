@@ -71,8 +71,8 @@ export default function LoginForm() {
           setStatus(true);
           setSubmitting(false);
 
-          window.location.replace("/");
           // router.replace("/");
+          window.location.replace("/");
         }, 2000);
       }}
     >

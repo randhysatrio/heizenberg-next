@@ -1,3 +1,5 @@
+import "server-only";
+
 // CORE
 import { cookies } from "next/headers";
 
@@ -5,15 +7,15 @@ import { cookies } from "next/headers";
 import { COOKIE_NAME } from "../_config/constanst";
 
 // INTERFACES
-import type { User } from "../_types/User";
+import type { AuthData } from "../_types/Auth";
 
 export function ServerCookieExtractor(): {
   isLoggedIn: boolean;
-  userData: User | undefined;
+  userData: AuthData;
 } {
   const cookieStore = cookies();
   const isLoggedIn = cookieStore.has(COOKIE_NAME);
-  const userData: User | undefined = isLoggedIn
+  const userData: AuthData = isLoggedIn
     ? JSON.parse(cookieStore.get(COOKIE_NAME)?.value as string)
     : undefined;
 
