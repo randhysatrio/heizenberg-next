@@ -1,6 +1,3 @@
-// COMPONENTS
-import { Toaster } from "react-hot-toast";
-
 // FONTS
 import { rubikThin, rubik, rubikBold, rubikExtraBold } from "../_fonts";
 
@@ -18,7 +15,6 @@ export default function RootAuthLayout({
         className={`${rubikThin.variable} ${rubik.variable} ${rubikBold.variable} ${rubikExtraBold.variable} font-rubik`}
       >
         {children}
-        <Toaster />
       </body>
     </html>
   );

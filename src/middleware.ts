@@ -1,16 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { COOKIE_NAME } from "@/app/_config/constanst";
+import { COOKIE_NAME, PROTECTED_PATHS } from "@/app/_config/constanst";
 
 export function middleware(req: NextRequest) {
   const isLoggedIn = req.cookies.has(COOKIE_NAME);
-  if (isLoggedIn) {
-    if (
-      req.nextUrl.pathname.startsWith("/login") ||
-      req.nextUrl.pathname.startsWith("/register")
-    ) {
-      return NextResponse.rewrite(new URL("/", req.url));
-    }
+  if (isLoggedIn && PROTECTED_PATHS.includes(req.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/", req.url));
   }
 }
 

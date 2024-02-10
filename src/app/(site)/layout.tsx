@@ -16,7 +16,7 @@ import "@/app/globals.css";
 import { MAIN_LAYOUT_ID } from "../_config/constanst";
 
 export const metadata: Metadata = {
-  title: "Heizenberg | All your Electronic needs",
+  title: "Heizenberg | All Your Electronic Needs",
   description:
     "Welcome to Heizenberg, the most complete electronic e-commerce in all multiverses",
   keywords: "Heizenberg, PC, Personal Computer, Best Deals",

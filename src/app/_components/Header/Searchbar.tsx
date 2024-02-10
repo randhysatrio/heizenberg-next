@@ -48,17 +48,24 @@ export default function Searchbar({
 
   function pageDown() {
     if (activeIdx < suggestions.length - 1) {
-      setActiveIdx(activeIdx + 1);
+      const currIdx = activeIdx + 1;
+      setActiveIdx(currIdx);
+      setKeyword(suggestions[currIdx].value);
     } else {
       setActiveIdx(0);
+      setKeyword(suggestions[0].value);
     }
   }
 
   function pageUp() {
     if (activeIdx > 0) {
-      setActiveIdx(activeIdx - 1);
+      const currIdx = activeIdx - 1;
+      setActiveIdx(currIdx);
+      setKeyword(suggestions[currIdx].value);
     } else {
-      setActiveIdx(suggestions.length - 1);
+      const lastIdx = suggestions.length - 1;
+      setActiveIdx(lastIdx);
+      setKeyword(suggestions[lastIdx].value);
     }
   }
 
@@ -111,26 +118,28 @@ export default function Searchbar({
               );
             } else {
               // On user clear keyword;
-              setSuggestions(searchResults);
               setActiveIdx(-1);
+              setSuggestions(searchResults);
             }
           }
         }}
         onKeyDown={(e) => {
-          if (e.code === "Escape") {
-            const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-            layout?.classList.remove("body__overlay");
+          if (hadSuggestions) {
+            if (e.code === "Escape") {
+              const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
+              layout?.classList.remove("body__overlay");
 
-            return clearSuggestion();
-          }
-          if (e.code === "ArrowDown") {
-            return pageDown();
-          }
-          if (e.code === "ArrowUp") {
-            return pageUp();
-          }
-          if (e.code === "Enter") {
-            return selectSuggestion();
+              return clearSuggestion();
+            }
+            if (e.code === "ArrowDown") {
+              return pageDown();
+            }
+            if (e.code === "ArrowUp") {
+              return pageUp();
+            }
+            if (e.code === "Enter") {
+              return selectSuggestion();
+            }
           }
         }}
         placeholder="Search item..."
@@ -154,7 +163,7 @@ export default function Searchbar({
         >
           <ul
             ref={ref}
-            className="flex max-h-40 w-full flex-col overflow-hidden rounded-lg bg-white ring-inset ring-gray-200"
+            className="flex max-h-40 w-full flex-col overflow-hidden rounded-lg bg-white ring-1 ring-inset ring-gray-300"
           >
             {suggestions.map((r, idx) => (
               <li
