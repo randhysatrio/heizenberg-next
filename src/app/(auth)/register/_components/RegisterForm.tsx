@@ -4,9 +4,9 @@
 import { useRouter } from "next/navigation";
 
 // COMPONENTS
-import { motion } from "framer-motion";
 import FormInputText from "@/app/_components/Input/FormInpuText";
 import AnimatedButton from "@/app/_components/Button/AnimatedButton";
+import ClickableText from "@/app/_components/UI/ClickableText";
 import GoogleLoginButton from "@/app/_components/Button/GoogleLoginButton";
 
 // FORM
@@ -96,13 +96,13 @@ export default function RegisterForm() {
               Login
             </AnimatedButton>
           </fieldset>
-          <motion.span
+          <ClickableText
             whileTap={{ scale: 0.95 }}
             onClick={() => redirectHandler("/login")}
             className="font-rubik mt-2 cursor-pointer text-xs text-slate-800 hover:text-slate-500 lg:text-sm"
           >
             Already have an account?
-          </motion.span>
+          </ClickableText>
 
           <section className="before: relative my-3 flex w-full items-center justify-center before:relative before:left-0 before:h-[2px] before:w-full before:bg-slate-300 after:relative after:right-0 after:h-[2px] after:w-full after:bg-slate-300 sm:my-4">
             <h6 className="font-rubik-bold mx-2 text-sm text-slate-600">Or</h6>
@@ -110,13 +110,13 @@ export default function RegisterForm() {
 
           <GoogleLoginButton as="signup" />
 
-          <motion.span
+          <ClickableText
             whileTap={{ scale: 0.95 }}
             onClick={() => redirectHandler("/")}
             className="font-rubik-bold mt-auto cursor-pointer text-sm text-slate-800 hover:text-slate-500"
           >
             Back to Home
-          </motion.span>
+          </ClickableText>
         </form>
       )}
     </Formik>

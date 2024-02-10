@@ -9,12 +9,14 @@ import { FaComputer } from "react-icons/fa6";
 
 import { ServerCookieExtractor } from "@/app/_utils/ServerCookieExtractor";
 
+import { MOCK_SRCH_RESULTS as searchResults } from "@/app/_mockData/SearchResults";
+
 export default function Header() {
   const { isLoggedIn, userData } = ServerCookieExtractor();
 
   return (
     <header className="fixed top-0 z-[2000] flex w-full flex-col bg-slate-50">
-      <section className="flex h-16 w-full items-center justify-between gap-3 border-b bg-white px-4 py-2 sm:gap-0 sm:px-5 lg:h-20">
+      <section className="flex h-16 w-full items-center justify-between gap-4 border-b bg-white px-3 py-2 sm:gap-0 sm:px-5 lg:h-20">
         <Link
           href="/"
           prefetch={false}
@@ -24,7 +26,7 @@ export default function Header() {
           <h1 className="font-rubik-bold hidden text-2xl lg:inline">HZN</h1>
         </Link>
 
-        <Searchbar />
+        <Searchbar searchResults={searchResults} />
 
         <HeaderMenus isLoggedIn={isLoggedIn} />
 

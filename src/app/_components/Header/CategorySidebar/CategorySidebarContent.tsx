@@ -43,14 +43,14 @@ export default function CategorySidebarContent({
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={closeSidebar}
-            className="absolute right-3 top-4"
+            className="absolute right-3 top-4 lg:rounded-md lg:p-1 lg:hover:bg-zinc-100"
           >
             <IoCloseSharp className="h-6 w-6 cursor-pointer sm:h-8 sm:w-8" />
           </motion.button>
 
           <section className="mb-10">
             <h5 className="font-rubik-bold text-2xl leading-none sm:text-3xl">
-              Choose from
+              Browse from
             </h5>
             <h2 className="font-rubik-extrabold text-3xl sm:text-4xl">
               Categories
@@ -74,14 +74,14 @@ export default function CategorySidebarContent({
           </ul>
         </nav>
         <nav className="flex h-full w-1/2 flex-col px-4 pt-6 sm:px-5 lg:px-6">
-          <motion.div
+          <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={toggleShowing}
             className="mb-6 flex cursor-pointer items-center gap-2 rounded-tl-md rounded-tr-md border-b border-zinc-500 p-2 hover:bg-zinc-200"
           >
             <FaArrowLeft className="h-3 w-3" />
             <span>Return</span>
-          </motion.div>
+          </motion.button>
           <h2 className="font-rubik-extrabold mb-3 text-3xl lg:mb-4">
             {selectedCategory?.name}
           </h2>

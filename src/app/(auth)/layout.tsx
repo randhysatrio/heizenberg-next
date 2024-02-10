@@ -1,22 +1,13 @@
-// CORE
-import type { Metadata } from "next";
-
 // COMPONENTS
 import { Toaster } from "react-hot-toast";
 
 // FONTS
-import { rubikThin, rubik, rubikBold, rubikExtraBold } from "./_fonts";
+import { rubikThin, rubik, rubikBold, rubikExtraBold } from "../_fonts";
 
 // STYLES
-import "./globals.css";
+import "@/app/globals.css";
 
-export const metadata: Metadata = {
-  title: "Heizenberg | All your shopping needs",
-  description:
-    "This is website for Heizenberg, the most complete ecommerce on all universe",
-};
-
-export default function RootLayout({
+export default function RootAuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

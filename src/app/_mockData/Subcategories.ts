@@ -6,7 +6,7 @@ export const MOCK_SCTG_PLAYSTATION: Subcategory = {
   name: "Playstation",
   category: {
     id: 1,
-    name: "Electronic",
+    name: "Gaming",
   },
 };
 export const MOCK_SCTG_XBOX: Subcategory = {

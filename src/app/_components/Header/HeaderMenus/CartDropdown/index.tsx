@@ -31,7 +31,7 @@ export default function CartDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
                   {carts.map((c) => (
                     <article
                       key={c.id}
-                      className="flex w-full gap-2 py-1 pl-2 pr-3 hover:bg-zinc-100"
+                      className="flex w-full cursor-default gap-2 py-1 pl-2 pr-3 hover:bg-zinc-100"
                     >
                       <div className="aspect-square h-14 overflow-hidden rounded-lg bg-white p-1 ring-1 ring-inset ring-zinc-200">
                         <img
