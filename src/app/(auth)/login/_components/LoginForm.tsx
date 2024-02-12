@@ -1,49 +1,49 @@
-"use client";
+'use client';
 
 // CORE
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 // COMPONENTS
-import FormInputText from "@/app/_components/Input/FormInpuText";
-import AnimatedButton from "@/app/_components/Button/AnimatedButton";
-import ClickableText from "@/app/_components/UI/ClickableText";
-import GoogleLoginButton from "@/app/_components/Button/GoogleLoginButton";
+import FormInputText from '@/app/_components/Input/FormInpuText';
+import AnimatedButton from '@/app/_components/Button/AnimatedButton';
+import ClickableText from '@/app/_components/UI/ClickableText';
+import GoogleLoginButton from '@/app/_components/Button/GoogleLoginButton';
 
 // LIBS
-import { setCookie } from "cookies-next";
+import { setCookie } from 'cookies-next';
 
 // FORMS
-import { Formik } from "formik";
-import * as Yup from "yup";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // STORE
-import { useAuthStore } from "@/app/_store/AuthStore";
+import { useAuthStore } from '@/app/_store/AuthStore';
 
 // CONSTANTS
-import { COOKIE_NAME } from "@/app/_config/constanst";
+import { COOKIE_NAME } from '@/app/_config/constanst';
 
 // INTERFACE
-import type { LoginForm } from "@/app/_types/Login";
+import type { LoginForm } from '@/app/_types/Login';
 
 // FORM VALUES
 const initialValues: LoginForm = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email("Please enter a valid email")
-    .required("Email is required"),
+    .email('Please enter a valid email')
+    .required('Email is required'),
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/,
-      "Invalid password",
+      'Invalid password'
     )
-    .required("Password is required"),
+    .required('Password is required'),
 });
 
 // MOCK DATA
-import { MOCK_USER } from "@/app/_mockData/Users";
+import { MOCK_USER } from '@/app/_mockData/Users';
 
 export default function LoginForm() {
   // ROUTER
@@ -65,13 +65,14 @@ export default function LoginForm() {
           login(data);
           setCookie(COOKIE_NAME, JSON.stringify(data), {
             maxAge: 30 * 24 * 60 * 60,
-            path: "/",
+            path: '/',
           });
 
           setStatus(true);
           setSubmitting(false);
 
-          router.replace("/");
+          // router.replace('/');
+          window.location.replace('/');
         }, 2000);
       }}
     >
@@ -101,7 +102,7 @@ export default function LoginForm() {
               type="submit"
               loading={isSubmitting}
               finish={status === true}
-              finishEl={"Login Succeed!"}
+              finishEl={'Login Succeed!'}
               disabled={!isValid}
               className="mt-2 lg:mt-5"
             >
@@ -110,22 +111,22 @@ export default function LoginForm() {
           </fieldset>
           <ClickableText
             whileTap={{ scale: 0.95 }}
-            onClick={() => redirectHandler("/register")}
-            className="font-rubik mt-2 cursor-pointer text-xs text-slate-800 hover:text-slate-500 lg:text-sm"
+            onClick={() => redirectHandler('/register')}
+            className="mt-2 cursor-pointer font-rubik text-xs text-slate-800 hover:text-slate-500 lg:text-sm"
           >
             Don't have an account?
           </ClickableText>
 
           <section className="before: relative my-3 flex w-full items-center justify-center before:relative before:left-0 before:h-[2px] before:w-full before:bg-slate-300 after:relative after:right-0 after:h-[2px] after:w-full after:bg-slate-300 sm:my-4">
-            <h6 className="font-rubik-bold mx-2 text-sm text-slate-600">Or</h6>
+            <h6 className="mx-2 font-rubik-bold text-sm text-slate-600">Or</h6>
           </section>
 
           <GoogleLoginButton />
 
           <ClickableText
             whileTap={{ scale: 0.95 }}
-            onClick={() => redirectHandler("/")}
-            className="font-rubik-bold mt-auto cursor-pointer text-sm text-slate-800 hover:text-slate-500"
+            onClick={() => redirectHandler('/')}
+            className="mt-auto cursor-pointer font-rubik-bold text-sm text-slate-800 hover:text-slate-500"
           >
             Back to Home
           </ClickableText>

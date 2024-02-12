@@ -1,6 +1,6 @@
-import type { Cart } from "../_types/Cart";
+import type { Cart } from '../_types/Cart';
 
-import { MOCK_PDCT_PLAYSTATION } from "./Products";
+import { MOCK_PDCT_PLAYSTATION } from './Products';
 
 export const MOCK_CARTS: Cart[] = [
   {

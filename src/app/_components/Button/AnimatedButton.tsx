@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 // LIBS
-import { type HTMLMotionProps, type Variant, motion } from "framer-motion";
+import { type HTMLMotionProps, type Variant, motion } from 'framer-motion';
 
 // ICON
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 type ElementAnimation = Record<string, Variant>;
 const VARIANTS: ElementAnimation = {
-  animate: (loading) => ({ y: loading ? "-50%" : "0%" }),
+  animate: (loading) => ({ y: loading ? '-50%' : '0%' }),
 };
 
 type AnimatedButtonProps = {
@@ -16,13 +16,13 @@ type AnimatedButtonProps = {
   loading: boolean;
   finish: boolean;
   finishEl?: React.ReactNode | undefined;
-} & HTMLMotionProps<"button">;
+} & HTMLMotionProps<'button'>;
 export default function AnimatedButton({
   children,
   loading,
   finish,
   finishEl,
-  type = "button",
+  type = 'button',
   className,
   ...props
 }: AnimatedButtonProps) {
@@ -32,7 +32,7 @@ export default function AnimatedButton({
       whileHover={{ filter: `brightness(1.1)` }}
       {...props}
       type={type}
-      className={`font-rubik-bold h-10 w-full overflow-hidden rounded-md bg-sky-500 text-white shadow-md disabled:pointer-events-none disabled:brightness-75 lg:h-11 ${className ?? ""}`}
+      className={`h-10 w-full overflow-hidden rounded-md bg-sky-500 font-rubik-bold text-white shadow-md disabled:pointer-events-none disabled:brightness-75 lg:h-11 ${className ?? ''}`}
     >
       <motion.div
         custom={loading}

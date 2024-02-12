@@ -1,8 +1,8 @@
 // LIBS
-import { create } from "zustand";
+import { create } from 'zustand';
 
 // TYPE
-import type { User } from "../_types/User";
+import type { User } from '../_types/User';
 
 type AuthStore = {
   isLoggedIn: boolean;

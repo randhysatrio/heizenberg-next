@@ -1,41 +1,41 @@
-"use client";
+'use client';
 
 // CORE
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 // COMPONENTS
-import FormInputText from "@/app/_components/Input/FormInpuText";
-import AnimatedButton from "@/app/_components/Button/AnimatedButton";
-import ClickableText from "@/app/_components/UI/ClickableText";
-import GoogleLoginButton from "@/app/_components/Button/GoogleLoginButton";
+import FormInputText from '@/app/_components/Input/FormInpuText';
+import AnimatedButton from '@/app/_components/Button/AnimatedButton';
+import ClickableText from '@/app/_components/UI/ClickableText';
+import GoogleLoginButton from '@/app/_components/Button/GoogleLoginButton';
 
 // FORM
-import { Formik } from "formik";
-import * as Yup from "yup";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // INTERFACES
-import type { RegisterForm } from "@/app/_types/Register";
+import type { RegisterForm } from '@/app/_types/Register';
 
 const initialValues: RegisterForm = {
-  name: "",
-  email: "",
-  password: "",
-  confirmationPassword: "",
+  name: '',
+  email: '',
+  password: '',
+  confirmationPassword: '',
 };
 const validationSchema = Yup.object({
   name: Yup.string()
-    .required("Full Name is required")
-    .max(255, "Max 255 chars"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
+    .required('Full Name is required')
+    .max(255, 'Max 255 chars'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/,
-      "Min 8 chars, 1 uppercase, lowercase and number",
+      'Min 8 chars, 1 uppercase, lowercase and number'
     )
-    .required("Password is required"),
+    .required('Password is required'),
   confirmationPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Password did not match")
-    .required("Confirmation Password is required"),
+    .oneOf([Yup.ref('password')], 'Password did not match')
+    .required('Confirmation Password is required'),
 });
 
 export default function RegisterForm() {
@@ -49,7 +49,7 @@ export default function RegisterForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={() => alert("bib is jambu")}
+      onSubmit={() => alert('bib is jambu')}
     >
       {({ handleSubmit, isValid, isSubmitting, status }) => (
         <form
@@ -98,22 +98,22 @@ export default function RegisterForm() {
           </fieldset>
           <ClickableText
             whileTap={{ scale: 0.95 }}
-            onClick={() => redirectHandler("/login")}
-            className="font-rubik mt-2 cursor-pointer text-xs text-slate-800 hover:text-slate-500 lg:text-sm"
+            onClick={() => redirectHandler('/login')}
+            className="mt-2 cursor-pointer font-rubik text-xs text-slate-800 hover:text-slate-500 lg:text-sm"
           >
             Already have an account?
           </ClickableText>
 
           <section className="before: relative my-3 flex w-full items-center justify-center before:relative before:left-0 before:h-[2px] before:w-full before:bg-slate-300 after:relative after:right-0 after:h-[2px] after:w-full after:bg-slate-300 sm:my-4">
-            <h6 className="font-rubik-bold mx-2 text-sm text-slate-600">Or</h6>
+            <h6 className="mx-2 font-rubik-bold text-sm text-slate-600">Or</h6>
           </section>
 
           <GoogleLoginButton as="signup" />
 
           <ClickableText
             whileTap={{ scale: 0.95 }}
-            onClick={() => redirectHandler("/")}
-            className="font-rubik-bold mt-auto cursor-pointer text-sm text-slate-800 hover:text-slate-500"
+            onClick={() => redirectHandler('/')}
+            className="mt-auto cursor-pointer font-rubik-bold text-sm text-slate-800 hover:text-slate-500"
           >
             Back to Home
           </ClickableText>

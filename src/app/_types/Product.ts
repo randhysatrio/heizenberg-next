@@ -1,5 +1,5 @@
-import type { Brand } from "./Brand";
-import type { Subcategory } from "./Category";
+import type { Brand } from './Brand';
+import type { Subcategory } from './Category';
 
 export type Product = {
   id: number;

@@ -1,14 +1,14 @@
 // CORE
-import { InputHTMLAttributes, useState } from "react";
+import { InputHTMLAttributes, useState } from 'react';
 
 // COMPONENTS
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 // ICONS
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 // LIBS
-import { Field, FieldProps } from "formik";
+import { Field, FieldProps } from 'formik';
 
 type FormInputTextProps = {
   label?: string | undefined;
@@ -20,12 +20,12 @@ export default function FormInputText({
   ...props
 }: FormInputTextProps) {
   // CONDITIONALS
-  const isPassword = type === "password";
+  const isPassword = type === 'password';
 
   // PASSWORD STATES
-  const [inputType, setInputType] = useState("password");
+  const [inputType, setInputType] = useState('password');
   function toggleInputType() {
-    return setInputType((c) => (c === "password" ? "text" : "password"));
+    return setInputType((c) => (c === 'password' ? 'text' : 'password'));
   }
 
   return (
@@ -41,7 +41,7 @@ export default function FormInputText({
               <motion.label
                 whileTap={{ scale: 0.95 }}
                 htmlFor={field.name}
-                className="font-rubik-bold mb-[2px] ml-1 w-fit cursor-pointer text-lg text-slate-600 hover:text-zinc-400"
+                className="mb-[2px] ml-1 w-fit cursor-pointer font-rubik-bold text-lg text-slate-600 hover:text-zinc-400"
               >
                 {label}
               </motion.label>
@@ -53,7 +53,7 @@ export default function FormInputText({
                 {...field}
                 id={field.name}
                 type={isPassword ? inputType : type}
-                className={`placeholder:font-rubik h-10 w-full cursor-pointer rounded-md px-2 ring-2 ring-gray-300 placeholder:text-gray-300 focus:outline-none ${isError ? "ring-red-500" : isValid ? "ring-emerald-500 focus:ring-sky-400" : "hover:ring-sky-400 focus:ring-sky-400"} ${isPassword ? "pr-8 lg:pr-9" : ""}`}
+                className={`h-10 w-full cursor-pointer rounded-md px-2 ring-2 ring-gray-300 placeholder:font-rubik placeholder:text-gray-300 focus:outline-none ${isError ? 'ring-red-500' : isValid ? 'ring-emerald-500 focus:ring-sky-400' : 'hover:ring-sky-400 focus:ring-sky-400'} ${isPassword ? 'pr-8 lg:pr-9' : ''}`}
               />
               {isPassword && (
                 <motion.button
@@ -62,7 +62,7 @@ export default function FormInputText({
                   onClick={toggleInputType}
                   className="absolute right-2 lg:right-3"
                 >
-                  {inputType === "password" ? (
+                  {inputType === 'password' ? (
                     <FaEye className="h-4 w-4 cursor-pointer text-gray-700 hover:text-sky-600" />
                   ) : (
                     <FaEyeSlash className="h-4 w-4 cursor-pointer text-gray-700 hover:text-sky-600" />

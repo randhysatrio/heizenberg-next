@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
 // CORE
-import { useState } from "react";
+import { useState } from 'react';
 
 // COMPONENTS
-import { motion } from "framer-motion";
-import Sidebar from "../../Sidebar";
-import CategorySidebarContent from "./CategorySidebarContent";
+import { motion } from 'framer-motion';
+import Sidebar from '../../Sidebar';
+import CategorySidebarContent from './CategorySidebarContent';
 
 // ICONS
-import { MdOutlineMenuOpen } from "react-icons/md";
+import { MdOutlineMenuOpen } from 'react-icons/md';
 
 export default function CategorySidebar() {
   // OPEN CLOSE SIDEBAR STATESS

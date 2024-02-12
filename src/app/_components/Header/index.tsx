@@ -1,15 +1,15 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import Searchbar from "./Searchbar";
-import Authentication from "./Authentication";
-import HeaderMenus from "./HeaderMenus";
-import CategorySidebar from "./CategorySidebar";
+import Searchbar from './Searchbar';
+import Authentication from './Authentication';
+import HeaderMenus from './HeaderMenus';
+import CategorySidebar from './CategorySidebar';
 
-import { FaComputer } from "react-icons/fa6";
+import { FaComputer } from 'react-icons/fa6';
 
-import { ServerCookieExtractor } from "@/app/_utils/ServerCookieExtractor";
+import { ServerCookieExtractor } from '@/app/_utils/ServerCookieExtractor';
 
-import { MOCK_SRCH_RESULTS as searchResults } from "@/app/_mockData/SearchResults";
+import { MOCK_SRCH_RESULTS as searchResults } from '@/app/_mockData/SearchResults';
 
 export default function Header() {
   const { isLoggedIn, userData } = ServerCookieExtractor();
@@ -23,7 +23,7 @@ export default function Header() {
           className="flex items-center gap-2 text-zinc-700 hover:text-zinc-500 sm:mr-5"
         >
           <FaComputer className="h-6 w-6 cursor-pointer" />
-          <h1 className="font-rubik-bold hidden text-2xl lg:inline">HZN</h1>
+          <h1 className="hidden font-rubik-bold text-2xl lg:inline">HZN</h1>
         </Link>
 
         <Searchbar searchResults={searchResults} />

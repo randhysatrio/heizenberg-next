@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
 // CORE
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 // COMPONENTS
-import { motion } from "framer-motion";
-import ButtonPrimary from "../Button/ButtonPrimary";
-import Sidebar from "../Sidebar";
+import { motion } from 'framer-motion';
+import ButtonPrimary from '../Button/ButtonPrimary';
+import Sidebar from '../Sidebar';
 
 // LIBS
-import { deleteCookie } from "cookies-next";
+import { deleteCookie } from 'cookies-next';
 
 // STORE
-import { useAuthStore } from "@/app/_store/AuthStore";
+import { useAuthStore } from '@/app/_store/AuthStore';
 
 // CONSTANTS
-import { COOKIE_NAME } from "@/app/_config/constanst";
+import { COOKIE_NAME } from '@/app/_config/constanst';
 
 // INTERFACE
-import type { AuthData } from "@/app/_types/Auth";
+import type { AuthData } from '@/app/_types/Auth';
 
 export default function Authentication({ userData }: { userData: AuthData }) {
   // ROUTER
@@ -37,9 +37,9 @@ export default function Authentication({ userData }: { userData: AuthData }) {
         return setOpenSidebar(false);
       }
     }
-    window.addEventListener("resize", closeOnResize);
+    window.addEventListener('resize', closeOnResize);
     return () => {
-      window.removeEventListener("resize", closeOnResize);
+      window.removeEventListener('resize', closeOnResize);
     };
   }, []);
 
@@ -62,14 +62,14 @@ export default function Authentication({ userData }: { userData: AuthData }) {
           >
             <div className="hidden flex-col items-start sm:flex">
               <h3 className="text-xs leading-none">Logged in as,</h3>
-              <h2 className="font-rubik-bold max-w-28 truncate text-sm lg:max-w-32 lg:text-base">
+              <h2 className="max-w-28 truncate font-rubik-bold text-sm lg:max-w-32 lg:text-base">
                 {userData?.fullName}
               </h2>
             </div>
             <div className="relative">
               <div className="relative aspect-square h-9 overflow-hidden rounded-full sm:h-8 sm:border-none lg:h-10">
                 <Image
-                  src={userData.picture || "/images/default-profile.jpeg"}
+                  src={userData.picture || '/images/default-profile.jpeg'}
                   alt={userData.fullName}
                   fill
                   className="object-cover"
@@ -82,7 +82,7 @@ export default function Authentication({ userData }: { userData: AuthData }) {
 
           <Sidebar open={openSidebar} close={toggleSidebar} side="right">
             <nav className="flex h-screen w-60 flex-col gap-5 bg-white px-4 py-10 sm:w-64 lg:w-72 lg:px-6">
-              <section className="font-rubik-bold w-full">
+              <section className="w-full font-rubik-bold">
                 <h6 className="text-lg lg:text-xl">Welcome,</h6>
                 <h3 className="truncate text-xl leading-none lg:text-3xl">
                   {userData?.fullName}
@@ -92,12 +92,12 @@ export default function Authentication({ userData }: { userData: AuthData }) {
               <ButtonPrimary
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  deleteCookie(COOKIE_NAME, { path: "/" });
+                  deleteCookie(COOKIE_NAME, { path: '/' });
                   logout();
                   toggleSidebar();
 
                   setTimeout(() => {
-                    window.location.replace("/");
+                    window.location.replace('/');
                   }, 800);
                 }}
                 className="bg-red-500"
@@ -108,7 +108,7 @@ export default function Authentication({ userData }: { userData: AuthData }) {
           </Sidebar>
         </>
       ) : (
-        <ButtonPrimary onClick={() => router.push("/login")}>
+        <ButtonPrimary onClick={() => router.push('/login')}>
           Login
         </ButtonPrimary>
       )}

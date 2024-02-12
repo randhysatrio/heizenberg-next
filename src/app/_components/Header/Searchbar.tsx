@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
 // CORE
-import { useState } from "react";
+import { useState } from 'react';
 
 // COMPONENTS
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
 
 // ICONS
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from 'react-icons/fa';
 
 // LIBS
-import useMeasure from "react-use-measure";
+import useMeasure from 'react-use-measure';
 
 // CONSTANTS
-import { MAIN_LAYOUT_ID } from "@/app/_config/constanst";
+import { MAIN_LAYOUT_ID } from '@/app/_config/constanst';
 
 // INTERFACES
-import type { SearchResult } from "@/app/_types/SearchResult";
+import type { SearchResult } from '@/app/_types/SearchResult';
 
 export default function Searchbar({
   searchResults,
@@ -24,7 +24,7 @@ export default function Searchbar({
   searchResults: SearchResult[];
 }) {
   // KEYWORD STATES
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
 
   // SUGGESTION STATES
   const hadSuggestions = searchResults.length > 0;
@@ -70,14 +70,14 @@ export default function Searchbar({
   }
 
   return (
-    <search className="relative flex h-10 w-full w-full items-center sm:mr-auto sm:w-96 lg:w-[600px]">
+    <search className="relative flex h-10 w-full items-center sm:mr-auto sm:w-96 lg:w-[600px]">
       <input
         type="search"
         value={keyword}
         onFocus={() => {
           // Adding overlay to body;
           const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-          layout?.classList.add("body__overlay");
+          layout?.classList.add('body__overlay');
 
           if (hadSuggestions) {
             // Adding suggestions;
@@ -87,9 +87,9 @@ export default function Searchbar({
                     r.value
                       .trim()
                       .toLowerCase()
-                      .includes(keyword.trim().toLowerCase()),
+                      .includes(keyword.trim().toLowerCase())
                   )
-                : searchResults,
+                : searchResults
             );
             setActiveIdx(-1);
           }
@@ -97,7 +97,7 @@ export default function Searchbar({
         onBlur={() => {
           // Removing overlay to body;
           const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-          layout?.classList.remove("body__overlay");
+          layout?.classList.remove('body__overlay');
 
           if (hadSuggestions) {
             clearSuggestion();
@@ -113,8 +113,8 @@ export default function Searchbar({
                   s.value
                     .toLowerCase()
                     .trim()
-                    .includes(e.target.value.toLowerCase().trim()),
-                ),
+                    .includes(e.target.value.toLowerCase().trim())
+                )
               );
             } else {
               // On user clear keyword;
@@ -125,19 +125,19 @@ export default function Searchbar({
         }}
         onKeyDown={(e) => {
           if (hadSuggestions) {
-            if (e.code === "Escape") {
+            if (e.code === 'Escape') {
               const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-              layout?.classList.remove("body__overlay");
+              layout?.classList.remove('body__overlay');
 
               return clearSuggestion();
             }
-            if (e.code === "ArrowDown") {
+            if (e.code === 'ArrowDown') {
               return pageDown();
             }
-            if (e.code === "ArrowUp") {
+            if (e.code === 'ArrowUp') {
               return pageUp();
             }
-            if (e.code === "Enter") {
+            if (e.code === 'Enter') {
               return selectSuggestion();
             }
           }
@@ -163,7 +163,7 @@ export default function Searchbar({
         >
           <ul
             ref={ref}
-            className="flex max-h-40 w-full flex-col overflow-hidden rounded-lg bg-white ring-1 ring-inset ring-gray-300"
+            className="ring- flex max-h-40 w-full flex-col overflow-hidden rounded-lg bg-white ring-inset ring-gray-300"
           >
             {suggestions.map((r, idx) => (
               <li
@@ -176,8 +176,9 @@ export default function Searchbar({
                   if (activeIdx > -1) {
                     setActiveIdx(-1);
                   }
+                  setKeyword('');
                 }}
-                className={`flex w-full items-center justify-between px-2 py-2 text-sm lg:p-3 lg:text-base ${idx === activeIdx ? "bg-zinc-200" : idx !== activeIdx ? "" : "hover:bg-zinc-200"}`}
+                className={`flex w-full items-center justify-between px-2 py-2 text-sm lg:p-3 lg:text-base ${idx === activeIdx ? 'bg-zinc-200' : idx !== activeIdx ? '' : 'hover:bg-zinc-200'}`}
               >
                 <p className="hover:cursor-pointer">{r.value}</p>
               </li>

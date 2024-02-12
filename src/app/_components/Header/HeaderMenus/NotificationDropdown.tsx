@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import ButtonPrimary from "../../Button/ButtonPrimary";
-import HoverDropdown from "../../Dropdown/HoverDropdown";
+import ButtonPrimary from '../../Button/ButtonPrimary';
+import HoverDropdown from '../../Dropdown/HoverDropdown';
 
-import { IoIosNotifications } from "react-icons/io";
+import { IoIosNotifications } from 'react-icons/io';
 
 export default function NotificationDropdown({
   isLoggedIn,
@@ -28,7 +28,7 @@ export default function NotificationDropdown({
               <h2 className="text-xl">See your Notification</h2>
             </div>
 
-            <Link href={"/login"}>
+            <Link href={'/login'}>
               <ButtonPrimary>Login</ButtonPrimary>
             </Link>
           </div>

@@ -1,5 +1,5 @@
-import NotificationDropdown from "./NotificationDropdown";
-import CartDropdown from "./CartDropdown";
+import NotificationDropdown from './NotificationDropdown';
+import CartDropdown from './CartDropdown';
 
 export default function HeaderMenus({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (

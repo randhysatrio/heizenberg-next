@@ -1,19 +1,19 @@
 // CORE
-import { useState } from "react";
+import { useState } from 'react';
 
 // COMPONENTS
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 // ICONS
-import { FaArrowLeft } from "react-icons/fa";
-import { MdOutlineChevronRight } from "react-icons/md";
-import { IoCloseSharp } from "react-icons/io5";
+import { FaArrowLeft } from 'react-icons/fa';
+import { MdOutlineChevronRight } from 'react-icons/md';
+import { IoCloseSharp } from 'react-icons/io5';
 
 // INTERFACES
-import type { Category } from "@/app/_types/Category";
+import type { Category } from '@/app/_types/Category';
 
 // MOCK DATA
-import { MOCK_CATEGORIES } from "@/app/_mockData/Categories";
+import { MOCK_CATEGORIES } from '@/app/_mockData/Categories';
 
 type CategorySidebarContentProps = {
   closeSidebar: () => void;
@@ -35,7 +35,7 @@ export default function CategorySidebarContent({
   return (
     <div className="flex h-screen w-64 overflow-x-hidden bg-white shadow-md sm:w-72 lg:w-80">
       <motion.div
-        animate={{ x: isShowing ? "-50%" : "0%" }}
+        animate={{ x: isShowing ? '-50%' : '0%' }}
         transition={{ bounce: 0 }}
         className="flex h-full w-fit min-w-[200%]"
       >
@@ -82,7 +82,7 @@ export default function CategorySidebarContent({
             <FaArrowLeft className="h-3 w-3" />
             <span>Return</span>
           </motion.button>
-          <h2 className="font-rubik-extrabold mb-3 text-3xl lg:mb-4">
+          <h2 className="mb-3 font-rubik-extrabold text-3xl lg:mb-4">
             {selectedCategory?.name}
           </h2>
 

@@ -1,13 +1,13 @@
-import "server-only";
+import 'server-only';
 
 // CORE
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
 // CONSTANTS
-import { COOKIE_NAME } from "../_config/constanst";
+import { COOKIE_NAME } from '../_config/constanst';
 
 // INTERFACES
-import type { AuthData } from "../_types/Auth";
+import type { AuthData } from '../_types/Auth';
 
 export function ServerCookieExtractor(): {
   isLoggedIn: boolean;

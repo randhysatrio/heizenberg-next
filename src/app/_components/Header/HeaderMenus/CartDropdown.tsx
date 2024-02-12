@@ -1,12 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import HoverDropdown from "@/app/_components/Dropdown/HoverDropdown";
-import ButtonPrimary from "@/app/_components/Button/ButtonPrimary";
-import ClickableText from "@/app/_components/UI/ClickableText";
+import HoverDropdown from '@/app/_components/Dropdown/HoverDropdown';
+import ButtonPrimary from '@/app/_components/Button/ButtonPrimary';
+import ClickableText from '@/app/_components/UI/ClickableText';
 
-import { IoIosCart } from "react-icons/io";
+import { IoIosCart } from 'react-icons/io';
 
-import { MOCK_CARTS as carts } from "@/app/_mockData/Carts";
+import { MOCK_CARTS as carts } from '@/app/_mockData/Carts';
 
 export default function CartDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
@@ -47,16 +47,16 @@ export default function CartDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
                           <p>{c.product.subcategory?.name}</p>
                         </div>
                         <div className="flex w-full items-center justify-between gap-[3px] text-lg">
-                          <h3 className="font-rubik-extrabold max-w-full truncate">
+                          <h3 className="max-w-full truncate font-rubik-extrabold">
                             {c.product.name}
                           </h3>
                           <p>x{c.quantity}</p>
                         </div>
                         <div className="w-full text-right">
                           <p className="font-rubik-bold">
-                            Rp{" "}
+                            Rp{' '}
                             {(c.product.price * c.quantity).toLocaleString(
-                              "id",
+                              'id'
                             )}
                           </p>
                         </div>
@@ -68,7 +68,7 @@ export default function CartDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
                   <Link href="/carts">
                     <ClickableText
                       whileTap={{ scale: 0.95 }}
-                      className="font-rubik-bold cursor-pointer text-xs text-sky-500 hover:text-sky-400"
+                      className="cursor-pointer font-rubik-bold text-xs text-sky-500 hover:text-sky-400"
                     >
                       Show All Carts
                     </ClickableText>
@@ -76,7 +76,7 @@ export default function CartDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </section>
               </div>
             ) : (
-              <div className="font-rubik-bold flex h-40 w-full flex-col items-center justify-center">
+              <div className="flex h-40 w-full flex-col items-center justify-center font-rubik-bold">
                 <p className="text-lg">You don't have</p>
                 <p className="text-xl">Anything in your Cart</p>
               </div>
@@ -89,7 +89,7 @@ export default function CartDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
               <h2 className="text-xl">See your Cart</h2>
             </div>
 
-            <Link href={"/login"}>
+            <Link href={'/login'}>
               <ButtonPrimary>Login</ButtonPrimary>
             </Link>
           </div>
