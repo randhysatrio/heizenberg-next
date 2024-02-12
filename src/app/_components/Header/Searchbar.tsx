@@ -70,122 +70,125 @@ export default function Searchbar({
   }
 
   return (
-    <search className="relative flex h-10 w-full items-center sm:mr-auto sm:w-96 lg:w-[600px]">
-      <input
-        type="search"
-        value={keyword}
-        onFocus={() => {
-          // Adding overlay to body;
-          const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-          layout?.classList.add('body__overlay');
+    <search className="relative flex h-10 w-full items-center rounded-lg p-1 ring-1 ring-inset ring-zinc-200 has-[div:focus-within]:ring-sky-300 sm:mr-auto sm:w-96 lg:h-12 lg:w-[600px] lg:p-[6px]">
+      <div className="relative w-full px-1 sm:px-2">
+        <input
+          type="search"
+          value={keyword}
+          onFocus={() => {
+            // Adding overlay to body;
+            const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
+            layout?.classList.add('body__overlay');
 
-          if (hadSuggestions) {
-            // Adding suggestions;
-            setSuggestions(
-              keyword
-                ? searchResults.filter((r) =>
-                    r.value
-                      .trim()
-                      .toLowerCase()
-                      .includes(keyword.trim().toLowerCase())
-                  )
-                : searchResults
-            );
-            setActiveIdx(-1);
-          }
-        }}
-        onBlur={() => {
-          // Removing overlay to body;
-          const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-          layout?.classList.remove('body__overlay');
-
-          if (hadSuggestions) {
-            clearSuggestion();
-          }
-        }}
-        onChange={(e) => {
-          setKeyword(e.target.value);
-
-          if (hadSuggestions) {
-            if (e.target.value) {
+            if (hadSuggestions) {
+              // Adding suggestions;
               setSuggestions(
-                searchResults.filter((s) =>
-                  s.value
-                    .toLowerCase()
-                    .trim()
-                    .includes(e.target.value.toLowerCase().trim())
-                )
+                keyword
+                  ? searchResults.filter((r) =>
+                      r.value
+                        .trim()
+                        .toLowerCase()
+                        .includes(keyword.trim().toLowerCase())
+                    )
+                  : searchResults
               );
-            } else {
-              // On user clear keyword;
               setActiveIdx(-1);
-              setSuggestions(searchResults);
             }
-          }
-        }}
-        onKeyDown={(e) => {
-          if (hadSuggestions) {
-            if (e.code === 'Escape') {
-              const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
-              layout?.classList.remove('body__overlay');
+          }}
+          onBlur={() => {
+            // Removing overlay to body;
+            const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
+            layout?.classList.remove('body__overlay');
 
-              return clearSuggestion();
+            if (hadSuggestions) {
+              clearSuggestion();
             }
-            if (e.code === 'ArrowDown') {
-              return pageDown();
+          }}
+          onChange={(e) => {
+            setKeyword(e.target.value);
+
+            if (hadSuggestions) {
+              if (e.target.value) {
+                setSuggestions(
+                  searchResults.filter((s) =>
+                    s.value
+                      .toLowerCase()
+                      .trim()
+                      .includes(e.target.value.toLowerCase().trim())
+                  )
+                );
+              } else {
+                // On user clear keyword;
+                setActiveIdx(-1);
+                setSuggestions(searchResults);
+              }
             }
-            if (e.code === 'ArrowUp') {
-              return pageUp();
+          }}
+          onKeyDown={(e) => {
+            if (hadSuggestions) {
+              if (e.code === 'Escape') {
+                const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
+                layout?.classList.remove('body__overlay');
+
+                return clearSuggestion();
+              }
+              if (e.code === 'ArrowDown') {
+                return pageDown();
+              }
+              if (e.code === 'ArrowUp') {
+                return pageUp();
+              }
+              if (e.code === 'Enter') {
+                return selectSuggestion();
+              }
             }
-            if (e.code === 'Enter') {
-              return selectSuggestion();
-            }
-          }
-        }}
-        placeholder="Search item..."
-        className="w-full rounded-bl-md rounded-tl-md p-2 ring-2 ring-inset ring-zinc-200 hover:ring-sky-300 focus:outline-none focus:ring-sky-300 lg:px-3"
-      />
+          }}
+          placeholder="Search item..."
+          className="h-full w-full placeholder:text-gray-200 focus:outline-none"
+        />
+
+        <AnimatePresence mode="wait">
+          <motion.article
+            animate={{ height }}
+            transition={{ bounce: 0 }}
+            className="absolute left-0 top-[150%] z-10 w-full overflow-hidden"
+          >
+            <ul
+              ref={ref}
+              className="ring- flex max-h-40 w-full flex-col overflow-hidden rounded-lg bg-white ring-inset ring-gray-300"
+            >
+              {suggestions.map((r, idx) => (
+                <li
+                  key={r.id}
+                  onMouseEnter={() => {
+                    setActiveIdx(idx);
+                    setKeyword(r.value);
+                  }}
+                  onMouseLeave={() => {
+                    if (activeIdx > -1) {
+                      setActiveIdx(-1);
+                    }
+                    setKeyword('');
+                  }}
+                  className={`flex w-full items-center justify-between px-2 py-2 text-sm lg:p-3 lg:text-base ${idx === activeIdx ? 'bg-zinc-200' : idx !== activeIdx ? '' : 'hover:bg-zinc-200'}`}
+                >
+                  <p className="hover:cursor-pointer">{r.value}</p>
+                </li>
+              ))}
+            </ul>
+          </motion.article>
+        </AnimatePresence>
+      </div>
+
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={() => selectSuggestion()}
-        className="flex h-full cursor-pointer items-center gap-2 rounded-br-md rounded-tr-md bg-zinc-300 px-4 text-white hover:bg-amber-300 hover:text-yellow-100 disabled:pointer-events-none"
+        className="flex h-full cursor-pointer items-center gap-2 rounded-md bg-zinc-300 px-4 text-white hover:bg-sky-300 hover:text-yellow-100 disabled:pointer-events-none sm:px-6"
         disabled={!keyword}
       >
         <FaSearch className="h-4 w-4" />
         <span className="hidden lg:inline">Search</span>
       </motion.button>
-
-      <AnimatePresence mode="wait">
-        <motion.article
-          animate={{ height }}
-          transition={{ bounce: 0 }}
-          className="absolute top-[110%] z-10 w-full overflow-hidden"
-        >
-          <ul
-            ref={ref}
-            className="ring- flex max-h-40 w-full flex-col overflow-hidden rounded-lg bg-white ring-inset ring-gray-300"
-          >
-            {suggestions.map((r, idx) => (
-              <li
-                key={r.id}
-                onMouseEnter={() => {
-                  setActiveIdx(idx);
-                  setKeyword(r.value);
-                }}
-                onMouseLeave={() => {
-                  if (activeIdx > -1) {
-                    setActiveIdx(-1);
-                  }
-                  setKeyword('');
-                }}
-                className={`flex w-full items-center justify-between px-2 py-2 text-sm lg:p-3 lg:text-base ${idx === activeIdx ? 'bg-zinc-200' : idx !== activeIdx ? '' : 'hover:bg-zinc-200'}`}
-              >
-                <p className="hover:cursor-pointer">{r.value}</p>
-              </li>
-            ))}
-          </ul>
-        </motion.article>
-      </AnimatePresence>
     </search>
   );
 }

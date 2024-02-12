@@ -83,7 +83,7 @@ export default function Authentication({ userData }: { userData: AuthData }) {
           <Sidebar open={openSidebar} close={toggleSidebar} side="right">
             <nav className="flex h-screen w-60 flex-col gap-5 bg-white px-4 py-10 sm:w-64 lg:w-72 lg:px-6">
               <section className="w-full font-rubik-bold">
-                <h6 className="text-lg lg:text-xl">Welcome,</h6>
+                <h4 className="text-lg lg:text-xl">Welcome,</h4>
                 <h3 className="truncate text-xl leading-none lg:text-3xl">
                   {userData?.fullName}
                 </h3>
@@ -100,7 +100,7 @@ export default function Authentication({ userData }: { userData: AuthData }) {
                     window.location.replace('/');
                   }, 800);
                 }}
-                className="bg-red-500"
+                className="w-full !bg-red-500"
               >
                 Logout
               </ButtonPrimary>

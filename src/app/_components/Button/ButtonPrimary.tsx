@@ -12,7 +12,7 @@ export default function ButtonPrimary({
       whileTap={{ scale: 0.95 }}
       whileHover={{ filter: `brightness(1.1)` }}
       {...props}
-      className={`rounded-md bg-sky-400 px-4 py-2 font-rubik-bold text-white shadow-sm sm:px-6 lg:px-10 lg:text-lg ${className ?? ''}`}
+      className={`h-10 rounded-md bg-sky-400 px-4 font-rubik-bold text-white shadow-sm sm:px-6 lg:h-11 lg:px-10 lg:text-lg ${className ?? ''}`}
     >
       {children}
     </motion.button>
