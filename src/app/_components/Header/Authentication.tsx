@@ -21,6 +21,8 @@ import { COOKIE_NAME } from '@/app/_config/constanst';
 
 // INTERFACE
 import type { AuthData } from '@/app/_types/Auth';
+import Link from 'next/link';
+import { IoIosCart, IoIosNotifications } from 'react-icons/io';
 
 export default function Authentication({ userData }: { userData: AuthData }) {
   // ROUTER
@@ -76,7 +78,6 @@ export default function Authentication({ userData }: { userData: AuthData }) {
                   sizes="34px"
                 />
               </div>
-              <span className="absolute right-[2px] top-[2px] h-2 w-2 rounded-full bg-sky-400 sm:hidden"></span>
             </div>
           </motion.button>
 
@@ -87,6 +88,15 @@ export default function Authentication({ userData }: { userData: AuthData }) {
                 <h3 className="truncate text-xl leading-none lg:text-3xl">
                   {userData?.fullName}
                 </h3>
+              </section>
+
+              <section className="flex items-center justify-center gap-8 sm:hidden">
+                <Link href={'/cart'} prefetch={false}>
+                  <IoIosNotifications className="h-6 w-6" />
+                </Link>
+                <Link href={'/cart'} prefetch={false}>
+                  <IoIosCart className="h-6 w-6" />
+                </Link>
               </section>
 
               <ButtonPrimary
