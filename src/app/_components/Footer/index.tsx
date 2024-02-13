@@ -5,8 +5,8 @@ import { FaComputer, FaXTwitter } from 'react-icons/fa6';
 
 export default function Footer() {
   return (
-    <footer className="flex w-full justify-between gap-6 border-t px-5 py-8 sm:px-20 lg:px-80 lg:py-12">
-      <section className="grid grid-cols-2 gap-6 sm:gap-20">
+    <footer className="flex w-full justify-between gap-6 border-t px-5 py-8 sm:px-20 lg:px-72 lg:py-12">
+      <section className="grid grid-cols-2 gap-6 sm:gap-20 lg:gap-32">
         <div className="col-span-1 flex flex-col gap-4 lg:gap-6">
           <h3 className="font-rubik-bold text-xl sm:text-2xl lg:text-3xl">
             HZN
@@ -46,7 +46,9 @@ export default function Footer() {
           </section>
         </div>
         <div className="col-span-1 flex flex-col gap-4 lg:gap-6">
-          <h3 className="font-rubik-bold text-xl sm:text-2xl">HELP</h3>
+          <h3 className="font-rubik-bold text-xl sm:text-2xl lg:text-3xl">
+            HELP
+          </h3>
 
           <section className="flex w-full flex-col gap-1 lg:gap-3">
             <ClickableText
