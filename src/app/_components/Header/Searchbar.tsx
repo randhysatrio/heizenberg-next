@@ -62,6 +62,14 @@ export default function Searchbar({
     }
   }
 
+  function pageUp() {
+    setActiveIdx(0);
+  }
+
+  function pageDown() {
+    setActiveIdx(suggestions.length - 1);
+  }
+
   function scrollDown() {
     if (activeIdx < suggestions.length - 1) {
       const currIdx = activeIdx + 1;
@@ -91,6 +99,7 @@ export default function Searchbar({
         elementRef.current &&
         !elementRef.current.contains(e.target as Node)
       ) {
+        // Removing overlay and clearing suggestions on click outside;
         handleOverlay('remove');
         clearSuggestion();
       }
@@ -156,7 +165,6 @@ export default function Searchbar({
             if (hadSuggestions) {
               if (e.code === 'Escape') {
                 handleOverlay('remove');
-                setKeyword('');
                 return clearSuggestion();
               }
               if (e.code === 'ArrowDown') {
@@ -164,6 +172,12 @@ export default function Searchbar({
               }
               if (e.code === 'ArrowUp') {
                 return scrollUp();
+              }
+              if (e.code === 'PageDown') {
+                return pageDown();
+              }
+              if (e.code === 'PageUp') {
+                return pageUp();
               }
               if (e.code === 'Enter') {
                 return selectSuggestion();
@@ -178,24 +192,17 @@ export default function Searchbar({
           <motion.article
             animate={{ height }}
             transition={{ bounce: 0 }}
-            className="absolute left-0 top-[135%] z-10 w-full overflow-hidden"
+            className="absolute left-0 top-[135%] z-10 w-full overflow-hidden rounded-md bg-white ring-1 ring-inset ring-gray-300 sm:rounded-lg lg:top-[155%]"
           >
-            <ul
-              ref={ref}
-              className="flex max-h-40 w-full flex-col overflow-hidden rounded-md bg-white ring-1 ring-inset ring-gray-300 sm:rounded-lg"
-            >
+            <ul ref={ref} className="max-h-40 w-full">
               {suggestions.map((r, idx) => (
                 <li
                   key={r.id}
                   onMouseEnter={() => {
                     setActiveIdx(idx);
-                    setKeyword(r.value);
                   }}
                   onMouseLeave={() => {
-                    if (activeIdx > -1) {
-                      setActiveIdx(-1);
-                      setKeyword('');
-                    }
+                    setActiveIdx(-1);
                   }}
                   onClick={(e) => {
                     if (e.defaultPrevented) {
@@ -219,7 +226,6 @@ export default function Searchbar({
                       onClick={(e) => {
                         // Mock delete function;
                         e.preventDefault();
-                        setKeyword('');
                         setSuggestions((c) => c.filter((s) => s.id !== r.id));
                       }}
                     >
