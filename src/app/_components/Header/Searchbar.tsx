@@ -13,6 +13,9 @@ import { FaRegTrashCan } from 'react-icons/fa6';
 // LIBS
 import useMeasure from 'react-use-measure';
 
+// STORE
+import { useAuthStore } from '@/app/_store/AuthStore';
+
 // UTILITES
 import { dateFormatFromUnix } from '@/app/_utils/dateFormat';
 
@@ -27,11 +30,14 @@ export default function Searchbar({
 }: {
   searchResults: SearchResult[];
 }) {
+  // AUTH STORE
+  const { isLoggedIn } = useAuthStore();
+
   // KEYWORD STATES
   const [keyword, setKeyword] = useState('');
 
   // SUGGESTION STATES
-  const hadSuggestions = searchResults.length > 0;
+  const shouldShowSuggestions = isLoggedIn && searchResults.length > 0;
   const [suggestions, setSuggestions] = useState<SearchResult[]>([]);
   const [activeIdx, setActiveIdx] = useState(-1);
 
@@ -39,7 +45,7 @@ export default function Searchbar({
   const elementRef = useRef<HTMLElement>(null);
 
   // ELEMENT MEASURE
-  const [ref, { height }] = useMeasure();
+  const [ulRef, { height }] = useMeasure();
 
   const handleOverlay = useCallback(function (type: 'add' | 'remove') {
     const layout = document.querySelector(`#${MAIN_LAYOUT_ID}`);
@@ -119,14 +125,14 @@ export default function Searchbar({
       ref={elementRef}
       className="relative flex h-10 w-full items-center rounded-lg p-1 ring-1 ring-inset ring-zinc-200 has-[div:focus-within]:ring-sky-300 sm:mr-auto sm:w-96 lg:h-12 lg:w-[600px] lg:p-[6px]"
     >
-      <div className="relative w-full px-1 sm:px-2">
+      <div className="relative w-full">
         <input
           type="search"
           value={keyword}
           onFocus={() => {
             handleOverlay('add');
 
-            if (hadSuggestions) {
+            if (shouldShowSuggestions) {
               // Adding suggestions;
               setSuggestions(
                 keyword
@@ -144,7 +150,7 @@ export default function Searchbar({
           onChange={(e) => {
             setKeyword(e.target.value);
 
-            if (hadSuggestions) {
+            if (shouldShowSuggestions) {
               if (e.target.value) {
                 setSuggestions(
                   searchResults.filter((s) =>
@@ -162,7 +168,7 @@ export default function Searchbar({
             }
           }}
           onKeyDown={(e) => {
-            if (hadSuggestions) {
+            if (shouldShowSuggestions) {
               if (e.code === 'Escape') {
                 handleOverlay('remove');
                 return clearSuggestion();
@@ -185,7 +191,7 @@ export default function Searchbar({
             }
           }}
           placeholder="Search item..."
-          className="h-full w-full placeholder:text-gray-200 focus:outline-none"
+          className="h-full w-full px-1 placeholder:text-gray-200 focus:outline-none sm:px-2"
         />
 
         <AnimatePresence mode="wait">
@@ -194,10 +200,13 @@ export default function Searchbar({
             transition={{ bounce: 0 }}
             className="absolute left-0 top-[135%] z-10 w-full overflow-hidden rounded-md bg-white ring-1 ring-inset ring-gray-300 sm:rounded-lg lg:top-[155%]"
           >
-            <ul ref={ref} className="max-h-40 w-full">
+            <ul ref={ulRef} className="max-h-40 w-full">
               {suggestions.map((r, idx) => (
-                <li
+                <motion.li
                   key={r.id}
+                  layout
+                  layoutScroll
+                  transition={{ layout: { bounce: 0 } }}
                   onMouseEnter={() => {
                     setActiveIdx(idx);
                   }}
@@ -210,7 +219,7 @@ export default function Searchbar({
                     }
                     selectSuggestion();
                   }}
-                  className={`flex w-full items-center justify-between gap-1 px-2 py-2 text-sm lg:p-3 lg:text-base ${idx === activeIdx ? 'bg-zinc-200' : idx === -1 ? 'hover:bg-zinc-200' : ''} cursor-default`}
+                  className={`flex w-full cursor-default items-center justify-between gap-1 px-2 py-2 text-sm lg:p-3 lg:text-base ${idx === activeIdx ? 'bg-zinc-200' : idx === -1 ? 'hover:bg-zinc-200' : ''}`}
                 >
                   <p className="min-w-0 max-w-full cursor-pointer truncate text-xs sm:text-sm lg:text-base">
                     {r.value}
@@ -232,7 +241,7 @@ export default function Searchbar({
                       <FaRegTrashCan className="h-2 w-2 cursor-pointer text-black/75 hover:text-black lg:ml-1 lg:h-3 lg:w-3" />
                     </motion.button>
                   </div>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.article>

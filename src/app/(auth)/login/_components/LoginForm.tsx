@@ -20,7 +20,7 @@ import * as Yup from 'yup';
 import { useAuthStore } from '@/app/_store/AuthStore';
 
 // CONSTANTS
-import { COOKIE_NAME } from '@/app/_config/constanst';
+import { COOKIE_NAME, COOKIE_TOKEN_NAME } from '@/app/_config/constanst';
 
 // INTERFACE
 import type { LoginForm } from '@/app/_types/Login';
@@ -64,6 +64,10 @@ export default function LoginForm() {
           const data = { ...MOCK_USER, email };
           login(data);
           setCookie(COOKIE_NAME, JSON.stringify(data), {
+            maxAge: 30 * 24 * 60 * 60,
+            path: '/',
+          });
+          setCookie(COOKIE_TOKEN_NAME, 'meong', {
             maxAge: 30 * 24 * 60 * 60,
             path: '/',
           });
