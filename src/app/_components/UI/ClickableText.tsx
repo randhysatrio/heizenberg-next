@@ -1,5 +1,7 @@
 'use client';
 
+import clsx from 'clsx';
+
 import { HTMLMotionProps, motion } from 'framer-motion';
 
 export default function ClickableText({
@@ -8,10 +10,7 @@ export default function ClickableText({
   ...props
 }: HTMLMotionProps<'span'>) {
   return (
-    <motion.span
-      {...props}
-      className={`w-fit cursor-pointer ${className || ''}`}
-    >
+    <motion.span {...props} className={clsx('w-fit cursor-pointer', className)}>
       {children}
     </motion.span>
   );

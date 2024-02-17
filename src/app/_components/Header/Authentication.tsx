@@ -4,11 +4,15 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // COMPONENTS
 import { motion } from 'framer-motion';
 import ButtonPrimary from '../Button/ButtonPrimary';
 import Sidebar from '../Sidebar';
+
+// ICONS
+import { IoIosCart, IoIosNotifications } from 'react-icons/io';
 
 // LIBS
 import { deleteCookie } from 'cookies-next';
@@ -21,8 +25,9 @@ import { COOKIE_NAME } from '@/app/_config/constanst';
 
 // INTERFACE
 import type { AuthData } from '@/app/_types/Auth';
-import Link from 'next/link';
-import { IoIosCart, IoIosNotifications } from 'react-icons/io';
+import ClickableText from '../UI/ClickableText';
+import { FaRegHeart, FaRegUser, FaUser } from 'react-icons/fa';
+import { RiCoupon2Line } from 'react-icons/ri';
 
 export default function Authentication({ userData }: { userData: AuthData }) {
   // ROUTER
@@ -82,21 +87,62 @@ export default function Authentication({ userData }: { userData: AuthData }) {
           </motion.button>
 
           <Sidebar open={openSidebar} close={toggleSidebar} side="right">
-            <nav className="flex h-screen w-60 flex-col gap-5 bg-white px-4 py-10 sm:w-64 lg:w-72 lg:px-6">
+            <nav className="flex h-screen w-60 flex-col gap-5 bg-white px-4 py-10 sm:w-64 sm:gap-6 lg:w-72 lg:px-6">
               <section className="w-full font-rubik-bold">
                 <h4 className="text-lg lg:text-xl">Welcome,</h4>
-                <h3 className="truncate text-xl leading-none lg:text-3xl">
+                <h3 className="truncate text-2xl leading-none lg:text-3xl">
                   {userData?.fullName}
                 </h3>
               </section>
 
-              <section className="flex items-center justify-center gap-8 sm:hidden">
-                <Link href={'/cart'} prefetch={false}>
-                  <IoIosNotifications className="h-6 w-6" />
-                </Link>
-                <Link href={'/cart'} prefetch={false}>
-                  <IoIosCart className="h-6 w-6" />
-                </Link>
+              <section className="w-full">
+                <nav className="flex w-full flex-col">
+                  <Link href={'/cart'}>
+                    <ClickableText
+                      whileTap={{ scale: 0.95 }}
+                      className="flex w-full items-center gap-2 border-b border-black/50 p-3 hover:bg-zinc-200 lg:gap-3"
+                    >
+                      <IoIosCart className="sm:h-5 sm:w-5" />
+                      <p className="sm:text-lg">Cart</p>
+                    </ClickableText>
+                  </Link>
+                  <Link href={'/notification'}>
+                    <ClickableText
+                      whileTap={{ scale: 0.95 }}
+                      className="flex w-full items-center gap-2 border-b border-black/50 p-3 hover:bg-zinc-200 lg:gap-3"
+                    >
+                      <IoIosNotifications className="sm:h-5 sm:w-5" />
+                      <p>Notification</p>
+                    </ClickableText>
+                  </Link>
+                  <Link href={'/wishlist'}>
+                    <ClickableText
+                      whileTap={{ scale: 0.95 }}
+                      className="flex w-full items-center gap-2 border-b border-black/50 p-3 hover:bg-zinc-200 lg:gap-3"
+                    >
+                      <FaRegHeart className="sm:h-5 sm:w-5" />
+                      <p>Wishlist</p>
+                    </ClickableText>
+                  </Link>
+                  <Link href={'/coupon'}>
+                    <ClickableText
+                      whileTap={{ scale: 0.95 }}
+                      className="flex w-full items-center gap-2 border-b border-black/50 p-3 hover:bg-zinc-200 lg:gap-3"
+                    >
+                      <RiCoupon2Line className="sm:h-5 sm:w-5" />
+                      <p>Coupon</p>
+                    </ClickableText>
+                  </Link>
+                  <Link href={'/profile'}>
+                    <ClickableText
+                      whileTap={{ scale: 0.95 }}
+                      className="flex w-full items-center gap-2 border-b border-black/50 p-3 hover:bg-zinc-200 lg:gap-3"
+                    >
+                      <FaUser className="sm:h-5 sm:w-5" />
+                      <p>Profile</p>
+                    </ClickableText>
+                  </Link>
+                </nav>
               </section>
 
               <ButtonPrimary
@@ -110,7 +156,7 @@ export default function Authentication({ userData }: { userData: AuthData }) {
                     window.location.replace('/');
                   }, 800);
                 }}
-                className="w-full !bg-red-500"
+                className="mt-auto w-full !bg-red-500"
               >
                 Logout
               </ButtonPrimary>
