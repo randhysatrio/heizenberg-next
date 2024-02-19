@@ -37,7 +37,7 @@ export default function MainBanner({ slides }: { slides: BannerSlide[] }) {
           el: '#__mb-pagination',
           bulletClass:
             'h-2 w-8 bg-zinc-400/50 hover:bg-zinc-400/75 sm:w-9 lg:w-10 cursor-pointer',
-          bulletActiveClass: 'bg-green-500',
+          bulletActiveClass: 'bg-green-400',
           renderBullet: function (_, className) {
             return `<span class="${className}"></span>`;
           },
