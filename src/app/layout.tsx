@@ -6,6 +6,9 @@ import { rubikThin, rubik, rubikBold, rubikExtraBold } from './_fonts';
 
 // STYLES
 import './globals.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export const metadata: Metadata = {
   title: 'Heizenberg | All Your Electronic Needs',
