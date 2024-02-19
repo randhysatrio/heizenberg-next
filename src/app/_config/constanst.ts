@@ -5,3 +5,11 @@ export const COOKIE_TOKEN_NAME = 'HZN_TOKEN';
 export const MAIN_LAYOUT_ID = '_main_layout';
 
 export const UNAUTHENTICATED_ROUTES = ['/login', '/register'];
+
+export const PROTECTED_ROUTES = [
+  '/cart',
+  '/notification',
+  '/wishlist',
+  '/coupon',
+  '/profile',
+];

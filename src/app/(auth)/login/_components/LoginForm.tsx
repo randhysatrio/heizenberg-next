@@ -75,13 +75,7 @@ export default function LoginForm() {
           setStatus(true);
           setSubmitting(false);
 
-          /*
-            Here we are using router.refresh() so it will trigger
-            the middleware redirect function (this function will 
-            check if the current next request has cookie in it,
-            meaning the user has already logged in) 
-          */
-          router.refresh();
+          window.location.replace('/');
         }, 2000);
       }}
     >

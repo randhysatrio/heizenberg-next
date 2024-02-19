@@ -10,9 +10,12 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ButtonPrimary from '../Button/ButtonPrimary';
 import Sidebar from '../Sidebar';
+import ClickableText from '../UI/ClickableText';
 
 // ICONS
 import { IoIosCart, IoIosNotifications } from 'react-icons/io';
+import { FaRegHeart, FaUser } from 'react-icons/fa';
+import { RiCoupon2Line } from 'react-icons/ri';
 
 // LIBS
 import { deleteCookie } from 'cookies-next';
@@ -21,13 +24,10 @@ import { deleteCookie } from 'cookies-next';
 import { useAuthStore } from '@/app/_store/AuthStore';
 
 // CONSTANTS
-import { COOKIE_NAME } from '@/app/_config/constanst';
+import { COOKIE_NAME, COOKIE_TOKEN_NAME } from '@/app/_config/constanst';
 
 // INTERFACE
 import type { AuthData } from '@/app/_types/Auth';
-import ClickableText from '../UI/ClickableText';
-import { FaRegHeart, FaRegUser, FaUser } from 'react-icons/fa';
-import { RiCoupon2Line } from 'react-icons/ri';
 
 export default function Authentication({ userData }: { userData: AuthData }) {
   // ROUTER
@@ -149,6 +149,7 @@ export default function Authentication({ userData }: { userData: AuthData }) {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   deleteCookie(COOKIE_NAME, { path: '/' });
+                  deleteCookie(COOKIE_TOKEN_NAME, { path: '/' });
                   logout();
                   toggleSidebar();
 

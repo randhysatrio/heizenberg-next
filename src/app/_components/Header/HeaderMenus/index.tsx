@@ -10,7 +10,7 @@ export default function HeaderMenus({ isLoggedIn }: { isLoggedIn: boolean }) {
     <section className="mx-5 hidden sm:flex lg:mx-10">
       {isLoggedIn && (
         <div className="flex items-center gap-8 lg:hidden">
-          <Link href={'/cart'} prefetch={false}>
+          <Link href={'/notification'} prefetch={false}>
             <IoIosNotifications className="h-4 w-4" />
           </Link>
           <Link href={'/cart'} prefetch={false}>
